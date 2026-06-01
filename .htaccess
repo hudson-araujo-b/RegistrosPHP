@@ -1,0 +1,5 @@
+# Impede o acesso direto ao arquivo .env através do navegador
+<FilesMatch "^\.env">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

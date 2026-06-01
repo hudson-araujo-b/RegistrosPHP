@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Registros</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <h1>Cadastro de Registros</h1>
+    <hr />
+    <form method="post" action="inserir.php">
+        <label for="txtnome">Nome:</label>
+        <input type="text" name="txtnome" id="txtnome" maxlength="40" required />
+
+        <label for="txtemail">E-mail:</label>
+        <input type="email" name="txtemail" id="txtemail" maxlength="40" required />
+
+        <label for="txtsenha">Senha:</label>
+        <input type="password" name="txtsenha" id="txtsenha" maxlength="8" />
+
+        <label>Sexo:</label>
+        <label><input type="radio" value="F" name="txtsexo" id="txtsexof" checked/> F</label>
+        <label><input type="radio" value="M" name="txtsexo" id="txtsexom" /> M</label>
+
+        <label for="txtdata">Data:</label>
+        <input type="date" name="txtdata" id="txtdata" />
+
+        <div class="actions">
+            <input type="submit" value="Cadastrar" />
+            <input type="reset" value="Limpar" onclick="document.getElementById('txtnome').focus();" />
+            <a class="button" href="../index.html">Menu</a>
+        </div>
+    </form>
+</body>
+</html>
