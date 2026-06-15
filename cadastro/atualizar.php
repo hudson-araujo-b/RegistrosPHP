@@ -1,33 +1,36 @@
 <?php
-// Inclui o arquivo de conexão que está na raiz
 require '../conexao.php';
-
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('Método inválido para atualização. Use o formulário de edição.');
 }
 
-// Recebe os dados enviados pelo formulário via método POST
+$id  = trim($_POST['txtid'] ?? '');
 $nome  = trim($_POST['txtnome'] ?? '');
 $email = trim($_POST['txtemail'] ?? '');
 $senha = trim($_POST['txtsenha'] ?? '');
 $sexo  = $_POST['txtsexo'] ?? '';
 $dtna  = $_POST['txtdata'] ?? null;
 
-// Validação básica: nome e e-mail são obrigatórios
-if ($nome === '' || $email === '') {
-    die('Erro: Nome e E-mail são campos obrigatórios para o cadastro.');
+if ($id === '' || !ctype_digit($id)) {
+    die('Erro: ID inválido para atualização.');
 }
 
-// Prepara a instrução SQL para inserção de dados de forma segura
-$sql = 'INSERT INTO Usuario (Nome, Email, Senha, Sexo, DataNascimento) 
-        VALUES (:nome, :email, :senha, :sexo, :dtna)';
+if ($nome === '' || $email === '') {
+    die('Erro: Nome e E-mail são campos obrigatórios para atualizar o registro.');
+}
 
-// Prepara a query no banco de dados
+$sql = 'UPDATE Usuario
+        SET Nome = :nome,
+            Email = :email,
+            Senha = :senha,
+            Sexo = :sexo,
+            DataNascimento = :dtna
+        WHERE Id = :id';
+
 $stmt = $cmd->prepare($sql);
-
-// Executa a query passando os valores reais
 $stmt->execute([
+    ':id'    => $id,
     ':nome'  => $nome,
     ':email' => $email,
     ':senha' => $senha,
@@ -35,7 +38,6 @@ $stmt->execute([
     ':dtna'  => $dtna,
 ]);
 
-// Redireciona para a listagem
 header('Location: ../registros/listar.php');
 exit;
-?>
+

@@ -58,6 +58,7 @@ if ($busca !== '') {
                     <th>Senha</th>
                     <th>Sexo</th>
                     <th>Nascimento</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +70,10 @@ if ($busca !== '') {
                         <td><?= htmlspecialchars($linha['Senha']) ?></td>
                         <td><?= htmlspecialchars($linha['Sexo']) ?></td>
                         <td><?= htmlspecialchars($linha['DataNascimento']) ?></td>
+                        <td>
+                            <a class="button" href="../cadastro/editar.php?id=<?php echo urlencode($linha['Id']); ?>">Editar</a>
+                            <a class="button" href="../cadastro/deletar.php?id=<?php echo urlencode($linha['Id']); ?>" style="background-color: #d32f2f;" onclick="return confirm('Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.');">Excluir</a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
